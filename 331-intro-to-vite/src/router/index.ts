@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '../views/EventListView.vue'
-import AboutView from '../views/AboutView.vue'
-import EventLayoutView from '../views/event/LayoutView.vue'
-import EventDetailView from '../views/event/DetailView.vue'
-import EventRegisterView from '../views/event/RegisterView.vue'
-import EventEditView from '../views/event/EditView.vue'
-import StudentListView from '../views/StudentListView.vue'
-import NotFoundView from '../views/NotFoundView.vue'
-import NetworkErrorView from '../views/NetworkErrorView.vue'
+import EventListView from '@/views/EventListView.vue'
+import AboutView from '@/views/AboutView.vue'
+import EventDetailView from '@/views/event/DetailView.vue'
+import EventRegisterView from '@/views/event/RegisterView.vue'
+import EventEditView from '@/views/event/EditView.vue'
+import EventLayoutView from '@/views/event/LayoutView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
+import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
 import { useEventStore } from '@/stores/event'
@@ -19,10 +18,7 @@ const router = createRouter({
       path: '/',
       name: 'event-list-view',
       component: EventListView,
-      props: (route) => ({ 
-        page: parseInt(route.query.page?.toString() || '1'),
-        pageSize: parseInt(route.query.pageSize?.toString() || '3')
-      })
+      props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') })
     },
     {
       path: '/event/:id',
@@ -70,14 +66,14 @@ const router = createRouter({
       ]
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView,
+      path: '/network-error',
+      name: 'network-error-view',
+      component: NetworkErrorView
     },
     {
-      path: '/students',
-      name: 'student-list-view',
-      component: StudentListView,
+      path: '/about',
+      name: 'about',
+      component: AboutView
     },
     {
       path: '/404/:resource',
@@ -86,23 +82,11 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/network-error',
-      name: 'network-error-view',
-      component: NetworkErrorView
-    },
-    {
       path: '/:catchAll(.*)',
       name: 'not-found',
       component: NotFoundView
-  }
-],
-scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { top: 0 }
     }
-  },
+  ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
