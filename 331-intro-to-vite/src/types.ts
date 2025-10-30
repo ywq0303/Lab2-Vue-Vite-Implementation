@@ -17,3 +17,13 @@ export interface MessageState {
 export interface EventState {
   event: Event | null
 }
+
+export interface Student {
+  id: number
+  name: string
+  surname: string
+  studentId: string
+  gpa: number
+  description: string
+  image: string
+}
